@@ -1,14 +1,13 @@
-from flask import Flask
+from flask import Flask, render_template
+from blog.views import users, articles
 
 
-app = Flask(__name__)
+def create_app() -> Flask:
+    flask_app = Flask(__name__)
+    reg_blueprints(flask_app)
+    return flask_app
 
 
-@app.route('/', methods=('GET'))
-def index():
-    return '<h1>Index Page<h1>'
-
-
-@app.errorhandler(404)
-def handler_404(error):
-    return f'<h1>404: Page Not Found<h1><h3>Check your URL<h3>'
+def reg_blueprints(app: Flask) -> None:
+    app.register_blueprint(users.users_app)
+    app.register_blueprint(articles.articles_app)

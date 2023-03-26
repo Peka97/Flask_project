@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ super() }}
+Users
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <ul style="list-style-type: none">
+            {% for pk in users %}
+            <li>{{ pk }}. <a href="{{ url_for('users_app.details', pk=pk) }}">{{ users[pk].name }}</a></li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+
+
+{% endblock %}

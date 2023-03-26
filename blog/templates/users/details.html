@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ super() }}
+User Info
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row ">
+
+        <div style="font-weight: 600" class="col col-md-1">
+            Parameter
+        </div>
+        <div style="font-weight: 600" class="col col-md-1">
+            Data
+        </div>
+    </div>
+
+    {% for param in user %}
+    <div class="row">
+
+        {% if param == 'articles' %}
+        <div class="col col-md-1">
+            Articles
+        </div>
+        <div class="col">
+            {% for id in user.articles %}
+            <div><a href="{{ url_for('articles_app.details', pk=id) }}">{{ articles[id].title }}</a></div>
+
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="col col-md-1">
+            {{ param }}
+        </div>
+        <div class="col col-md-1">
+            {{ user[param] }}
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

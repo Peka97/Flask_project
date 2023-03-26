@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ super() }}
+Article Details
+{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="row ">
+        <div class="col">
+            <h3>{{ article.title }}</h3>
+        </div>
+    </div>
+    <div class="col">
+        <h6>Author:
+            <a href="{{ url_for('users_app.details', pk=article.author) }}">
+                {{user.name}}
+            </a>
+        </h6>
+    </div>
+    <br>
+    <div class="row ">
+        <div class="col col-6">
+            <h6>{{ article.text }}</h6>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

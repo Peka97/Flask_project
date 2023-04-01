@@ -1,28 +1,31 @@
 from flask import Blueprint, render_template
 from werkzeug.exceptions import NotFound
 
-
-from ..models.models import get_users, get_articles
+from blog.models import User
+from blog.views.articles import get_random_cat
 
 
 users_app = Blueprint("users_app", __name__,
                       url_prefix='/users', static_folder='../static')
 
 
-@users_app.route('/', methods=['GET'], endpoint='list')
+@users_app.route('/', methods=['GET'], endpoint='index')
+def index():
+    return render_template("/index.html")
+
+
+@users_app.route('/users', methods=['GET'], endpoint='list')
 def users_list():
-    return render_template("/users/list.html", users=get_users())
+    users = User.query.all()
+    return render_template("/users/list.html", users=users)
 
 
-@users_app.route("/<pk>", methods=['GET'], endpoint='details')
-def get_user(pk: str):
-    try:
-        user = get_users()[pk]
-        user['articles'].extend(
-            [id for id, item in get_articles().items() if item['author'] == pk])
-        return render_template("/users/details.html", user=user, articles=get_articles())
-    except KeyError as err:
-        return NotFound(f"User with ID {pk} doesn't exist!")
+@users_app.route("/<user_id>", methods=['GET'], endpoint='details')
+def get_user(user_id: str):
+    user = User.query.filter_by(id=user_id).one_or_none()
+    if user is None:
+        raise NotFound(f"User #{user_id} doesn't exist!")
+    return render_template("/users/details.html", user=user, image=get_random_cat)
 
 
 @users_app.errorhandler(404)

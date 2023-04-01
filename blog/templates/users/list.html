@@ -6,13 +6,20 @@ Users
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <ul style="list-style-type: none">
-            {% for pk in users %}
-            <li>{{ pk }}. <a href="{{ url_for('users_app.details', pk=pk) }}">{{ users[pk].name }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
+<div>
+    <ul>
+        {% for user in users %}
+        <li>
+            <a href="{{ url_for('users_app.details', user_id=user.id) }}">
+                {{ user.username -}}
+            </a>
+            {% if user.is_staff %}
+            <span class="badge bg-secondary">staff</span>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+
 </div>
 {% endblock %}

@@ -2,7 +2,7 @@
 
 {% block title %}
 {{ super() }}
-Article Details
+Article | {{ article.header }}
 {% endblock %}
 
 {% block content %}
@@ -10,20 +10,23 @@ Article Details
 <div class="container">
     <div class="row ">
         <div class="col">
-            <h3>{{ article.title }}</h3>
+            <h3>{{ article.header }}</h3>
         </div>
     </div>
     <div class="col">
         <h6>Author:
-            <a href="{{ url_for('users_app.details', pk=article.author) }}">
-                {{user.name}}
+            <a href="{{ url_for('users_app.details', user_id=article.author_id) }}">
+                {{user.username}}
             </a>
         </h6>
     </div>
     <br>
+    <img src={{ image() }} alt="image">
+    <br>
+    <br>
     <div class="row ">
         <div class="col col-6">
-            <h6>{{ article.text }}</h6>
+            <h6>{{ article.content }}</h6>
         </div>
 
     </div>

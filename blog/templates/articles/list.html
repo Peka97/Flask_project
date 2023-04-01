@@ -9,17 +9,17 @@ Articles
 <div class="container">
     <div class="row row-cols-4">
 
-        {% for num in articles %}
+        {% for article in articles %}
 
         <div class="col">
             <div class="card" style="width: 18rem;">
-                <img src={{ articles[num].img }} class="card-img-top" alt="image">
+                <img src={{ image() }} class="card-img-top" alt="image">
                 <div class="card-body">
-                    <h5 class="card-title">{{ articles[num].title }}</h5>
-                    <p class="card-text"> {{ articles[num].text[:100] }}... </p>
-                    <a href="{{ url_for('articles_app.details', pk=num) }}" class="btn btn-primary">More</a>
-                    <a style='margin: 15px;' href="{{ url_for('users_app.details', pk=articles[num].author) }}"
-                        class="card-link">Show Author {{ users[articles[num].author].name }}</a>
+                    <h5 class="card-title">{{ article.header }}</h5>
+                    <p class="card-text"> {{ article.content[:100] }}... </p>
+                    <a href="{{ url_for('articles_app.details', id=article.id) }}" class="btn btn-primary">More</a>
+                    <a style='margin: 15px;' href="{{ url_for('users_app.details', user_id=article.author.id) }}"
+                        class="card-link">Show Author {{ article.author.username }}</a>
                 </div>
             </div>
         </div>

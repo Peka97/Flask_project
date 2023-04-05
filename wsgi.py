@@ -26,7 +26,7 @@ def create_users():
 
     users = [
         User(username="admin", is_staff=True),
-        User(username="James"),
+        User(username="James", email='test@ya.ru'),
         User(username="Ben"),
         User(username="Anna")
     ]

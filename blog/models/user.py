@@ -10,6 +10,7 @@ class User(db.Model, UserMixin):
     username = Column(String(80), unique=True, nullable=False)
     is_staff = Column(Boolean, nullable=False, default=False)
     articles = db.relationship('Article')
+    email = Column(String(255), nullable=False, default="", server_default="")
 
     def __repr__(self):
         return f"<User #{self.id} {self.username!r}>"

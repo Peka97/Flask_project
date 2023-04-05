@@ -14,5 +14,8 @@ User #{{ user.id }} Details
         {{ user.username }}
     </h1>
     <img src={{ image() }} alt="image">
+    <div>
+        {{ user.email }}
+    </div>
 </div>
 {% endblock %}

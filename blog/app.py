@@ -1,9 +1,15 @@
-from blog.models import User
-from flask import Flask
+import os
 
-from blog.views import users, articles, auth
+from flask import Flask
+from flask_migrate import Migrate
+
+from blog.models import User
 from blog.models.database import db
+from blog.views import users, articles, auth
 from blog.views.auth import login_manager
+
+
+migrate = Migrate()
 
 
 def create_app() -> Flask:
@@ -14,10 +20,11 @@ def create_app() -> Flask:
 
 
 def config_and_connect_db(app: Flask) -> None:
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////tmp/blog.db"
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.config["SECRET_KEY"] = "abcdefg123456"
+    cfg_name = os.environ.get("CONFIG_NAME") or "ProdConfig"
+    app.config.from_object(f"blog.config.{cfg_name}")
+
     db.init_app(app)
+    migrate.init_app(app, db, compare_type=True)
     login_manager.init_app(app)
 
 

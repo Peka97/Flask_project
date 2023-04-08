@@ -9,15 +9,15 @@ users_app = Blueprint("users_app", __name__,
                       url_prefix='/users', static_folder='../static')
 
 
-@users_app.route('/', methods=['GET'], endpoint='index')
-def index():
-    return render_template("/index.html")
-
-
-@users_app.route('/users', methods=['GET'], endpoint='list')
+@users_app.route('/', methods=['GET'], endpoint='list')
 def users_list():
     users = User.query.all()
     return render_template("/users/list.html", users=users)
+
+
+@users_app.route('/index', methods=['GET'], endpoint='index')
+def index():
+    return render_template("/index.html")
 
 
 @users_app.route("/<user_id>", methods=['GET'], endpoint='details')

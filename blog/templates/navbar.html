@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="{{ url_for('users_app.index') }}">Blog Site</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
         <a class="nav-link" href="{{ url_for('auth_app.logout') }}">Logout</a>
         {% else %}
         <a href="{{ url_for('auth_app.login') }}"
-            class="nav-link {% if request.endpoint == 'login' -%}active{%- endif %}">
+            class="nav-link text-center {% if request.endpoint == 'login' -%}active{%- endif %}">
             Login
         </a>
         {% endif %}

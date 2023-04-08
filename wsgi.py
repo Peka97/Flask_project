@@ -1,4 +1,5 @@
 from sqlalchemy.exc import InvalidRequestError, IntegrityError
+from werkzeug.security import generate_password_hash
 
 from blog.app import create_app
 from blog.models.database import db
@@ -23,12 +24,19 @@ def init_db():
 
 @app.cli.command("create-users")
 def create_users():
-
     users = [
-        User(username="admin", is_staff=True),
-        User(username="James", email='test@ya.ru'),
-        User(username="Ben"),
-        User(username="Anna")
+        User(
+            username="admin",
+            password=generate_password_hash('12345'),
+            is_staff=True
+        ),
+        User(
+            username="James",
+            password=generate_password_hash('12345'),
+            email='test@ya.ru'
+        ),
+        User(username="Ben", password=generate_password_hash('12345')),
+        User(username="Anna", password=generate_password_hash('12345'))
     ]
 
     db.session.query(User).delete()

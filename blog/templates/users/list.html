@@ -13,9 +13,13 @@ Users
             <a href="{{ url_for('users_app.details', user_id=user.id) }}">
                 {{ user.username -}}
             </a>
+            {% if user.author %}
+            <span class="badge bg-secondary">author</span>
+            {% endif %}
             {% if user.is_staff %}
             <span class="badge bg-secondary">staff</span>
             {% endif %}
+
         </li>
         {% endfor %}
     </ul>

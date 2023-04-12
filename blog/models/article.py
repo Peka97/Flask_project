@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 
 from blog.models.database import db
-from blog.models.user import User
+from blog.models.user import Author
 
 
 class Article(db.Model):
@@ -17,11 +17,13 @@ class Article(db.Model):
         None
     """
     __tablename__ = 'article'
+
     id = Column(Integer, primary_key=True)
-    author_id = Column(Integer, ForeignKey(User.id))
+    author_id = Column(Integer, ForeignKey(Author.id), nullable=False)
     header = Column(String(80))
     content = Column(String(9999))
-    author = db.relationship('User')
+
+    author = db.relationship('Author', back_populates='articles')
 
     def __repr__(self):
         return f"<Article #{self.id}>"

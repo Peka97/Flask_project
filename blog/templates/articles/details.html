@@ -15,8 +15,8 @@ Article | {{ article.header }}
     </div>
     <div class="col">
         <h6>Author:
-            <a href="{{ url_for('users_app.details', user_id=article.author_id) }}">
-                {{user.username}}
+            <a href="{{ url_for('authors_app.details', author_id=article.author.id) }}">
+                {{ author.user.username }}
             </a>
         </h6>
     </div>

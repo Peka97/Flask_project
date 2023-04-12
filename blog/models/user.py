@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from werkzeug.security import check_password_hash
 from flask_login import UserMixin
 
@@ -16,10 +16,21 @@ class User(db.Model, UserMixin):
     first_name = Column(String(255), default=None)
     last_name = Column(String(255), default=None)
     is_staff = Column(Boolean, nullable=False, default=False)
-    articles = db.relationship('Article')
+
+    author = db.relationship('Author', back_populates='user')
 
     def __repr__(self):
         return f"<User #{self.id} {self.username!r}>"
 
     def validate_password(self, password):
         return check_password_hash(self.password, password)
+
+
+class Author(db.Model):
+    __tablename__ = 'author'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+
+    user = db.relationship('User', back_populates='author')
+    articles = db.relationship('Article', back_populates='author')

@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash
 from blog.app import create_app
 from blog.models.database import db
 from blog.models.user import User
+from blog.models.user import Author
 from blog.models.article import Article
 
 
@@ -51,9 +52,9 @@ def create_users():
 @app.cli.command("create-articles")
 def create_articles():
     articles = [
-        Article(author_id=2, header='This is awesome title!',
+        Article(author_id=1, header='This is awesome title!',
                 content='Some realy awesome, believe me. True. I\'m not lie.'),
-        Article(author_id=3, header='Another one awesome header!',
+        Article(author_id=2, header='Another one awesome header!',
                 content='Wow! Look at this. I\'m seriously.')
     ]
 
@@ -65,6 +66,23 @@ def create_articles():
 
     print("Created articles:\n", "\n".join(
         [article.header for article in articles]))
+
+
+@app.cli.command("create-authors")
+def create_authors():
+    authors = [
+        Author(user_id=2),
+        Author(user_id=3)
+    ]
+
+    db.session.query(Author).delete()
+
+    for author in authors:
+        db.session.add(author)
+    db.session.commit()
+
+    print("Created articles:\n", "\n".join(
+        [str(author.id) for author in authors]))
 
 
 if __name__ == '__main__':

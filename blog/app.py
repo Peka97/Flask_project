@@ -3,9 +3,8 @@ import os
 from flask import Flask
 from flask_migrate import Migrate
 
-from blog.models import User
 from blog.models.database import db
-from blog.views import users, articles, auth
+from blog.views import users, articles, auth, authors
 from blog.views.auth import login_manager
 
 
@@ -30,5 +29,6 @@ def config_and_connect_db(app: Flask) -> None:
 
 def reg_blueprints(app: Flask) -> None:
     app.register_blueprint(users.users_app)
+    app.register_blueprint(authors.authors_app)
     app.register_blueprint(articles.articles_app)
     app.register_blueprint(auth.auth_app)

@@ -19,6 +19,12 @@ Article | {{ article.header }}
                 {{ author.user.username }}
             </a>
         </h6>
+        <h6>
+            Tags:
+            {% for tag in article.tags %}
+            <a href="#">{{ tag.name }}</a>
+            {% endfor %}
+        </h6>
     </div>
     <br>
     <img src={{ image() }} alt="image">

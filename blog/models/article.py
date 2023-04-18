@@ -33,3 +33,6 @@ class Article(db.Model):
 
     def __repr__(self):
         return f"<Article #{self.id}>"
+
+    def __str__(self):
+        return self.header

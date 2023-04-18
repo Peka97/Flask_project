@@ -34,3 +34,6 @@ class Author(db.Model):
 
     user = db.relationship('User', back_populates='author')
     articles = db.relationship('Article', back_populates='author')
+
+    def __str__(self):
+        return self.user.username

@@ -8,7 +8,12 @@ class BaseConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = "8f42a73054b1749f8f58848be5e6502c"
     WTF_CSRF_ENABLED = True
-    FLASK_ADMIN_SWATCH = 'cosmo'
+    # ADMIN
+    FLASK_ADMIN_SWATCH = "cosmo"
+    # API
+    OPENAPI_URL_PREFIX = "/api/swagger"
+    OPENAPI_SWAGGER_UI_PATH = "/"
+    OPENAPI_SWAGGER_UI_VERSION = "3.22.0"
 
 
 class DevConfig(BaseConfig):

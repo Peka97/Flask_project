@@ -12,10 +12,10 @@ COPY blog ./blog
 
 EXPOSE 5000
 
-RUN python flask init-db
-RUN python flask create-users
-RUN python flask create-artices
-RUN python flask create-authos
-RUN python flask create-tags
+RUN flask init-db
+RUN flask create-users
+RUN flask create-artices
+RUN flask create-authos
+RUN flask create-tags
 
 CMD ["python3", "wsgi.py"]

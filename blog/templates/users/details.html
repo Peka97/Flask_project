@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ super() }}
+User #{{ user.id }} Details
+{% endblock %}
+
+{% block content %}
+<div>
+    {% if user.is_staff %}
+    <span class="badge bg-secondary">staff</span>
+    {% endif %}
+    <h1>
+        {{ user.username }}
+    </h1>
+    <img src={{ image() }} alt="image">
+    <div>
+        {{ user.email }}
+    </div>
+</div>
+{% endblock %}

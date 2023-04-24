@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ super() }}
+Articles
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row row-cols-4">
+
+        {% for article in articles %}
+
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src={{ image() }} class="card-img-top" alt="image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.header }}</h5>
+                    <p class="card-text"> {{ article.content[:100] }}... </p>
+                    <a href="{{ url_for('articles_app.details', id=article.id) }}" class="btn btn-primary">More</a>
+                    <a style='margin: 15px;' href="{{ url_for('authors_app.details', author_id=article.author.id) }}"
+                        class="card-link">Show Author {{ article.author.user.username }}</a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock %}

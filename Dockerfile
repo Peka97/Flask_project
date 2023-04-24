@@ -14,8 +14,8 @@ EXPOSE 5000
 
 RUN flask init-db
 RUN flask create-users
-RUN flask create-artices
-RUN flask create-authos
+RUN flask create-articles
+RUN flask create-authors
 RUN flask create-tags
 
 CMD ["python3", "wsgi.py"]
